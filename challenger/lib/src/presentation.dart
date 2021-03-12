@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 
-import 'menuInicial.dart';
+import 'mainMenu.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -19,9 +19,9 @@ Widget _presentation() {
   return Stack(
     children: [
       SplashScreen(
-        seconds: 3,
-        navigateAfterSeconds: HomeScreen(),
-        backgroundColor: Colors.blueAccent,
+        seconds: 2,
+        navigateAfterSeconds: MainMenu(),
+        backgroundColor: Colors.black87,
         useLoader: false,
       ),
       Container(

@@ -1,33 +1,37 @@
-import 'package:challenger/src/loading.dart';
+import 'package:challenger/src/instructions.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
+class MainMenu extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _MainMenuState createState() => _MainMenuState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.indigoAccent[100],
       body: Column(
         children: [
           Row(children: [
-            Container(
-              height: 25,
+            SizedBox(
+              height: 30,
             ),
           ]),
-          Expanded(
+          SizedBox(
+            width: 360,
+            height: 300,
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.indigoAccent[400],
                 image: DecorationImage(
-                  image: AssetImage('assets/menu.png'),
+                  image: AssetImage('assets/ppt.png'),
                 ),
               ),
             ),
           ),
+          SizedBox(height: 20),
           Expanded(
             child: Column(
               children: [
@@ -35,14 +39,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Container(
                     child: Row(
                       children: [
+                        SizedBox(width: 45),
                         Expanded(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Loading()));
-                            },
-                            child: Text(
-                              '1 Jogador',
-                              style: TextStyle(fontSize: 20),
+                          child: ButtonTheme(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                setState(() {});
+                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Instructions()));
+                              },
+                              child: Text(
+                                '1 Jogador',
+                                style: TextStyle(fontSize: 20),
+                              ),
                             ),
                           ),
                         ),
@@ -64,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     decoration: BoxDecoration(),
                     child: Row(
                       children: [
+                        SizedBox(width: 45),
                         Expanded(
                           child: ElevatedButton(
                             onPressed: null,
@@ -91,6 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     decoration: BoxDecoration(),
                     child: Row(
                       children: [
+                        SizedBox(width: 45),
                         Expanded(
                           child: ElevatedButton(
                             onPressed: null,
@@ -115,6 +125,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
+          ),
+          SizedBox(
+            height: 50,
           ),
         ],
       ),
