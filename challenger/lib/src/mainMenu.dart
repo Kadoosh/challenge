@@ -45,7 +45,7 @@ class _MainMenuState extends State<MainMenu> {
                             child: ElevatedButton(
                               onPressed: () {
                                 setState(() {});
-                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Instructions()));
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => Instructions()));
                               },
                               child: Text(
                                 '1 Jogador',

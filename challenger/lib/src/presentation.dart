@@ -3,12 +3,12 @@ import 'package:splashscreen/splashscreen.dart';
 
 import 'mainMenu.dart';
 
-class HomePage extends StatefulWidget {
+class Presentation extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _PresentationState createState() => _PresentationState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _PresentationState extends State<Presentation> {
   @override
   Widget build(BuildContext context) {
     return _presentation();

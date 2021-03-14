@@ -1,7 +1,9 @@
+import 'dart:async';
+import 'package:challenger/src/components/patternButtom.dart';
 import 'package:challenger/src/info.dart';
+import 'package:challenger/src/mainMenu.dart';
 import 'package:challenger/src/moves.dart';
-
-import 'package:challenger/src/presentation.dart';
+import 'package:challenger/src/playAgain.dart';
 import 'package:flutter/material.dart';
 
 class OnePlayer extends StatefulWidget {
@@ -12,20 +14,18 @@ class OnePlayer extends StatefulWidget {
 class _OnePlayerState extends State<OnePlayer> {
   int winners, defeats, ties;
 
-  int indexGameStates = 3;
+  String imagePlayer1;
+  String imagePlayer2;
+
+  int indexGameStates;
   var gameStates = [
     Image(image: AssetImage('assets/ganhou.png')),
-    Image(image: AssetImage('assets/empate.png')),
+    Image(image: AssetImage('assets/tied.png')),
     Image(image: AssetImage('assets/perdeu.png')),
     Image(image: AssetImage('assets/esperando.png')),
   ];
 
-  var rockPaperScissors = [
-    Image(image: AssetImage('assets/pedra.png')),
-    Image(image: AssetImage('assets/papel.png')),
-    Image(image: AssetImage('assets/tesoura.png')),
-    Image(image: AssetImage('assets/transparente.png')),
-  ];
+  int _start = 15;
 
   Move player1Move;
   Move player2Move;
@@ -35,413 +35,322 @@ class _OnePlayerState extends State<OnePlayer> {
   void initState() {
     super.initState();
 
-    setState(() {
-      winners = 0;
-      defeats = 0;
-      ties = 0;
-    });
+    setState(
+      () {
+        winners = 0;
+        defeats = 0;
+        ties = 0;
+        indexGameStates = 3;
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    if (player2Move == Move.ROCK) {
+      imagePlayer2 = 'pedra';
+    } else if (player2Move == Move.PAPER) {
+      imagePlayer2 = 'papel';
+    } else {
+      imagePlayer2 = 'tesoura';
+    }
+
+    if (player1Move == Move.ROCK) {
+      imagePlayer1 = 'pedra';
+    } else if (player1Move == Move.PAPER) {
+      imagePlayer1 = 'papel';
+    } else {
+      imagePlayer1 = 'tesoura';
+    }
+    if (player1Move == null || player2Move == null) {
+      imagePlayer1 = 'transparente';
+      imagePlayer2 = 'transparente';
+    }
     return MaterialApp(
-      theme: ThemeData(primaryColor: Colors.amber),
-      home: Container(
-        color: Colors.white,
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              height: 100,
-              color: Colors.white,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+      home: Stack(
+        children: [
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(20),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 100,
+                  color: Colors.white,
+                  child: Column(
                     children: [
-                      SizedBox(
-                        child: Container(
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                height: 60,
-                                width: 60,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      Navigator.of(context).pushReplacement(
-                                        MaterialPageRoute(
-                                          builder: (context) => HomePage(),
-                                        ),
-                                      );
-                                    });
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage('assets/voltar.png'),
-                                        fit: BoxFit.scaleDown,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 20),
-                              SizedBox(
-                                height: 90,
-                                width: 200,
-                                child: Container(
-                                  color: Colors.white,
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                image: AssetImage('assets/1user.png'),
-                                                fit: BoxFit.fill,
-                                              ),
-                                            ),
-                                            height: 30,
-                                            width: 30,
-                                          ),
-                                          Text(
-                                            '${Info().namePlayer1}:',
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.black,
-                                              backgroundColor: Colors.white,
-                                            ),
-                                          ),
-                                          Text(
-                                            winners.toString(),
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.black,
-                                              backgroundColor: Colors.white,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                image: AssetImage('assets/empate.png'),
-                                                fit: BoxFit.fill,
-                                              ),
-                                            ),
-                                            height: 30,
-                                            width: 30,
-                                          ),
-                                          Container(
-                                            child: Text(
-                                              'Empate:',
-                                              style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.black,
-                                                backgroundColor: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                          Text(
-                                            ties.toString(),
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.black,
-                                              backgroundColor: Colors.white,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                image: AssetImage('assets/maquina.png'),
-                                                fit: BoxFit.fill,
-                                              ),
-                                            ),
-                                            height: 30,
-                                            width: 30,
-                                          ),
-                                          Text(
-                                            'Robo:',
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.black,
-                                              backgroundColor: Colors.white,
-                                            ),
-                                          ),
-                                          Text(
-                                            defeats.toString(),
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.black,
-                                              backgroundColor: Colors.white,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 90,
-                                width: 90,
-                                child: Container(
-                                  child: gameStates[indexGameStates],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: ListView(
-                children: [
-                  SizedBox(
-                    height: 390,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: AssetImage(
-                            'assets/ringue.png',
-                          ),
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: Colors.black),
-                      ),
-                      child: Column(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Container(
-                            width: 100,
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Container(
-                                      width: 100,
-                                      decoration: BoxDecoration(
-                                        color: Colors.yellow,
-                                        borderRadius: BorderRadius.circular(20),
-                                        border: Border.all(color: Colors.black),
-                                      ),
-                                      child: Text(
-                                        'Jogada Robo',
-                                        style: TextStyle(
-                                          fontSize: 14.5,
-                                          color: Colors.black,
+                          SizedBox(
+                            child: Container(
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    height: 60,
+                                    width: 60,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                              builder: (context) => MainMenu(),
+                                            ),
+                                          );
+                                        });
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage('assets/voltar.png'),
+                                            fit: BoxFit.scaleDown,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      width: 100,
-                                      child: rockPaperScissors[player2Move?.index ?? 3],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(width: 100, child: Image.asset('assets/versus.png')),
-                          Container(
-                            width: 400,
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Container(
-                                      width: 100,
-                                      child: rockPaperScissors[player1Move?.index ?? 3],
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.yellow,
-                                        borderRadius: BorderRadius.circular(20),
-                                        border: Border.all(color: Colors.black),
+                                  ),
+                                  SizedBox(width: 20),
+                                  SizedBox(
+                                    height: 90,
+                                    width: 200,
+                                    child: Container(
+                                      color: Colors.white,
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: AssetImage('assets/1user.png'),
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                ),
+                                                height: 30,
+                                                width: 30,
+                                              ),
+                                              Text(
+                                                '${Info().namePlayer1}:',
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.black,
+                                                  backgroundColor: Colors.white,
+                                                ),
+                                              ),
+                                              Text(
+                                                winners.toString(),
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.black,
+                                                  backgroundColor: Colors.white,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: AssetImage('assets/empate.png'),
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                ),
+                                                height: 30,
+                                                width: 30,
+                                              ),
+                                              Container(
+                                                child: Text(
+                                                  'Empate:',
+                                                  style: TextStyle(
+                                                    fontSize: 18,
+                                                    color: Colors.black,
+                                                    backgroundColor: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                              Text(
+                                                ties.toString(),
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.black,
+                                                  backgroundColor: Colors.white,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: AssetImage('assets/maquina.png'),
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                ),
+                                                height: 30,
+                                                width: 30,
+                                              ),
+                                              Text(
+                                                'Robo:',
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.black,
+                                                  backgroundColor: Colors.white,
+                                                ),
+                                              ),
+                                              Text(
+                                                defeats.toString(),
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.black,
+                                                  backgroundColor: Colors.white,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
                                       ),
-                                      child: Text(
-                                        'Jogada ${Info().namePlayer1}',
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          color: Colors.black,
-                                        ),
-                                      ),
                                     ),
-                                  ],
-                                ),
-                              ],
+                                  ),
+                                  SizedBox(
+                                    height: 90,
+                                    width: 90,
+                                    child: Container(
+                                      child: gameStates[indexGameStates],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],
                       ),
-                    ),
+                    ],
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                ),
+                Expanded(
+                  child: ListView(
                     children: [
                       SizedBox(
+                        height: 390,
                         child: Container(
-                          child: Row(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage(
+                                'assets/ringue.png',
+                              ),
+                            ),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: Colors.black),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              SizedBox(
-                                height: 90,
-                                width: 90,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    setState(
-                                      () {
-                                        player2Move = MoveRobot().moveRobot();
-                                        player1Move = Move.ROCK;
-                                        winner = CheckWinner().run(player1Move, player2Move);
-                                      },
-                                    );
-                                    placar();
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage('assets/pedra.png'),
-                                        fit: BoxFit.scaleDown,
-                                      ),
+                              Container(
+                                width: 100,
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Container(
+                                          width: 100,
+                                          decoration: BoxDecoration(
+                                            color: Colors.yellow,
+                                            borderRadius: BorderRadius.circular(20),
+                                            border: Border.all(color: Colors.black),
+                                          ),
+                                          child: Text(
+                                            'Jogada Robo',
+                                            style: TextStyle(
+                                              fontSize: 14.5,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
+                                    Row(
+                                      children: [
+                                        Container(
+                                          width: 100,
+                                          child: Image(image: AssetImage('assets/$imagePlayer2.png')),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(width: 100, child: Image.asset('assets/versus.png')),
+                              Container(
+                                width: 400,
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Container(
+                                          width: 100,
+                                          child: Image(image: AssetImage('assets/$imagePlayer1.png')),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.yellow,
+                                            borderRadius: BorderRadius.circular(20),
+                                            border: Border.all(color: Colors.black),
+                                          ),
+                                          child: Text(
+                                            'Jogada ${Info().namePlayer1}',
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
                           ),
                         ),
                       ),
-                      SizedBox(
-                        child: Container(
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                height: 90,
-                                width: 90,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    setState(
-                                      () {
-                                        player2Move = MoveRobot().moveRobot();
-                                        player1Move = Move.PAPER;
-                                        winner = CheckWinner().run(player1Move, player2Move);
-                                      },
-                                    );
-                                    placar();
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage('assets/papel.png'),
-                                        fit: BoxFit.scaleDown,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          StandardButtom(
+                            onPressButton: movePlays,
+                            move: Move.ROCK,
+                            invisibleButtom: indexGameStates,
                           ),
-                        ),
-                      ),
-                      SizedBox(
-                        child: Container(
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                height: 90,
-                                width: 90,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    setState(
-                                      () {
-                                        player2Move = MoveRobot().moveRobot();
-                                        player1Move = Move.SCISSORS;
-                                        winner = CheckWinner().run(player1Move, player2Move);
-                                      },
-                                    );
-                                    placar();
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage('assets/tesoura.png'),
-                                        fit: BoxFit.scaleDown,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                          StandardButtom(
+                            onPressButton: movePlays,
+                            move: Move.PAPER,
+                            invisibleButtom: indexGameStates,
                           ),
-                        ),
+                          StandardButtom(
+                            onPressButton: movePlays,
+                            move: Move.SCISSORS,
+                            invisibleButtom: indexGameStates,
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  dynamic movePlay() {
-    Container(
-      child: Row(
-        children: [
-          SizedBox(
-            height: 90,
-            width: 90,
-            child: ElevatedButton(
-              onPressed: () {
-                setState(
-                  () {
-                    player2Move = MoveRobot().moveRobot();
-                    player1Move = Move.SCISSORS;
-                    winner = CheckWinner().run(player1Move, player2Move);
-                  },
-                );
-                placar();
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/tesoura.png'),
-                    fit: BoxFit.scaleDown,
-                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ],
@@ -449,7 +358,18 @@ class _OnePlayerState extends State<OnePlayer> {
     );
   }
 
-  void placar() {
+  void movePlays(Move movePlayer) {
+    setState(() {
+      player2Move = MoveRobot().moveRobot();
+      player1Move = movePlayer;
+      winner = CheckWinner().run(player1Move, player2Move);
+    });
+
+    scorebord();
+    delayBottom();
+  }
+
+  void scorebord() {
     if (winner == null) {
       ties++;
       indexGameStates = 1;
@@ -460,5 +380,38 @@ class _OnePlayerState extends State<OnePlayer> {
       indexGameStates = 2;
       defeats++;
     }
+  }
+
+  void delayBottom() {
+    _start = 1;
+    final oneSec = const Duration(seconds: 1);
+    Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (_start == 0) {
+          player1Move = null;
+          player2Move = null;
+          indexGameStates = 3;
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => PlayAgain(
+                winnerPlayer: winner,
+                nameWinnerPlayer: Info().namePlayer1,
+              ),
+            ),
+          );
+
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(
+            () {
+              _start--;
+            },
+          );
+        }
+      },
+    );
   }
 }
