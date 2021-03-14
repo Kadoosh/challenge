@@ -22,101 +22,101 @@ class PlayAgain extends StatelessWidget {
       roundWinner = ('$nameWinnerPlayer!');
     } else if (winnerPlayer == WinnerMove.MOVE_2) {
       stateGameImage = 'ganhou';
-      roundWinner = 'Robo!';
+      roundWinner = 'Robô!';
     } else {
       stateGameImage = 'tied';
       roundWinner = 'Empatou!';
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: AssetImage(
-            'assets/ringue.png',
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: AssetImage(
+              'assets/ringue.png',
+            ),
           ),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.black),
         ),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.black),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Container(
-                    width: 100,
-                    height: 100,
-                    child: Image.asset('assets/$stateGameImage.png'),
-                  ),
-                  SizedBox(width: 10),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.yellowAccent,
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.black),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(),
                     ),
-                    child: Text(
-                      '$roundWinner',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 40,
+                  ],
+                ),
+                Row(
+                  children: [
+                    Container(
+                      width: 150,
+                      height: 150,
+                      child: Image.asset('assets/$stateGameImage.png'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 30),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.yellowAccent,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.black),
+              ),
+              child: Text(
+                '$roundWinner',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 30,
+                ),
+              ),
+            ),
+            SizedBox(height: 100),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 100,
+                      width: 100,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => MainMenu()));
+                        },
+                        child: Image.asset('assets/voltar.png'),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 400,
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 100,
-                    width: 100,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => MainMenu()));
-                      },
-                      child: Image.asset('assets/voltar.png'),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 100,
+                      width: 100,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(MaterialPageRoute(builder: (context) => OnePlayer()));
+                        },
+                        child: Image.asset('assets/reload.png'),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 100,
-                    width: 100,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop(MaterialPageRoute(builder: (context) => OnePlayer()));
-                      },
-                      child: Image.asset('assets/reload.png'),
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
-        ],
+                  ],
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

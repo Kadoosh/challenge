@@ -19,12 +19,12 @@ Widget _presentation() {
   return Stack(
     children: [
       SplashScreen(
-        seconds: 2,
+        seconds: 3,
         navigateAfterSeconds: MainMenu(),
         backgroundColor: Colors.black87,
         useLoader: false,
       ),
-      Container(
+      Center(
         child: Image(image: AssetImage("assets/presentation.png")),
       ),
     ],

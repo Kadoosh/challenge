@@ -44,7 +44,6 @@ class _CollectNameState extends State<CollectName> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  labelText: 'Max 8 Letras...',
                 ),
                 keyboardType: TextInputType.name,
               ),
@@ -54,19 +53,12 @@ class _CollectNameState extends State<CollectName> {
                 child: ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      if (_nameController.text.length > 8) {
-                        maxCharacter = 'Somente 8 CARACTERES';
-                      } else if (_nameController.text.length == 0) {
-                        maxCharacter = 'Invalido, Digite novamente...';
-                      } else {
-                        print(_nameController.text);
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) => OnePlayer(),
-                          ),
-                        );
-                        maxCharacter = 'Digite seu nome...';
-                      }
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => OnePlayer(),
+                        ),
+                      );
+                      maxCharacter = 'Digite seu nome...';
                     });
                   },
                   child: Text('Enviar', textAlign: TextAlign.center),
