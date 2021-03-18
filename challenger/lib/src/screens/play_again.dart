@@ -1,11 +1,14 @@
-import 'package:challenger/src/mainMenu.dart';
-import 'package:challenger/src/moves.dart';
-import 'package:challenger/src/onePlayer.dart';
+import 'package:audioplayers/audio_cache.dart';
+import 'package:challenger/src/screens/main_menu.dart';
+
+import 'package:challenger/src/screens/one_player.dart';
+import 'package:challenger/src/services/winner_move.dart';
 import 'package:flutter/material.dart';
 
 class PlayAgain extends StatelessWidget {
   final WinnerMove winnerPlayer;
   final String nameWinnerPlayer;
+
   const PlayAgain({
     @required this.nameWinnerPlayer,
     @required this.winnerPlayer,
@@ -14,27 +17,14 @@ class PlayAgain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String roundWinner;
-    String stateGameImage;
-
-    if (winnerPlayer == WinnerMove.MOVE_1) {
-      stateGameImage = 'ganhou';
-      roundWinner = ('$nameWinnerPlayer!');
-    } else if (winnerPlayer == WinnerMove.MOVE_2) {
-      stateGameImage = 'ganhou';
-      roundWinner = 'Robô!';
-    } else {
-      stateGameImage = 'tied';
-      roundWinner = 'Empatou!';
-    }
-
+    winnerSong();
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
             image: AssetImage(
-              'assets/ringue.png',
+              'assets/ring.png',
             ),
           ),
           borderRadius: BorderRadius.circular(20),
@@ -91,7 +81,11 @@ class PlayAgain extends StatelessWidget {
                       width: 100,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => MainMenu()));
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => MainMenu(),
+                            ),
+                          );
                         },
                         child: Image.asset('assets/voltar.png'),
                       ),
@@ -106,18 +100,57 @@ class PlayAgain extends StatelessWidget {
                       width: 100,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).pop(MaterialPageRoute(builder: (context) => OnePlayer()));
+                          Navigator.of(context).pop(
+                            MaterialPageRoute(
+                              builder: (context) => OnePlayer(
+                                namePlayer1: nameWinnerPlayer,
+                              ),
+                            ),
+                          );
                         },
-                        child: Image.asset('assets/reload.png'),
+                        child: Image.asset(
+                          'assets/reload.png',
+                        ),
                       ),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ],
         ),
       ),
     );
+  }
+
+  String get stateGameImage {
+    String _stateGameImage;
+
+    if (winnerPlayer == WinnerMove.MOVE_1) {
+      _stateGameImage = 'win';
+    } else if (winnerPlayer == WinnerMove.MOVE_2) {
+      _stateGameImage = 'win';
+    } else {
+      _stateGameImage = 'tied';
+    }
+    return _stateGameImage;
+  }
+
+  String get roundWinner {
+    String _roundWinner;
+
+    if (winnerPlayer == WinnerMove.MOVE_1) {
+      _roundWinner = ('$nameWinnerPlayer!');
+    } else if (winnerPlayer == WinnerMove.MOVE_2) {
+      _roundWinner = 'Robô!';
+    } else {
+      _roundWinner = 'Empatou!';
+    }
+    return _roundWinner;
+  }
+
+  void winnerSong() {
+    final player = AudioCache();
+    player.play('click.mp3');
   }
 }

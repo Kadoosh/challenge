@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 
-import 'mainMenu.dart';
+import 'main_menu.dart';
 
 class Presentation extends StatefulWidget {
   @override

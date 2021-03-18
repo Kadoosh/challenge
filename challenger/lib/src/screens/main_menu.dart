@@ -1,16 +1,13 @@
-import 'package:challenger/src/instructions.dart';
+import 'package:challenger/src/screens/instructions.dart';
 import 'package:flutter/material.dart';
 
-class MainMenu extends StatefulWidget {
-  @override
-  _MainMenuState createState() => _MainMenuState();
-}
+class MainMenu extends StatelessWidget {
+  const MainMenu({Key key}) : super(key: key);
 
-class _MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.indigoAccent[400],
+      backgroundColor: Colors.white,
       body: Center(
         child: ListView(
           children: [
@@ -22,7 +19,7 @@ class _MainMenuState extends State<MainMenu> {
                   height: 350,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Colors.indigoAccent[400],
+                    color: Colors.blueAccent,
                     image: DecorationImage(
                       image: AssetImage('assets/ppt.png'),
                     ),

@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-import 'onePlayer.dart';
+import 'one_player.dart';
 
-TextEditingController _nameController = TextEditingController();
-
-class CollectName extends StatefulWidget {
-  @override
-  _CollectNameState createState() => _CollectNameState();
-}
-
-class _CollectNameState extends State<CollectName> {
-  var maxCharacter = 'Digite seu nome...';
+class CollectName extends StatelessWidget {
+  const CollectName({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _nameController = TextEditingController();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -40,7 +35,7 @@ class _CollectNameState extends State<CollectName> {
                 controller: _nameController,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                  hintText: maxCharacter.toString(),
+                  hintText: 'Digite seu nome...',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -52,14 +47,13 @@ class _CollectNameState extends State<CollectName> {
                 padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                 child: ElevatedButton(
                   onPressed: () {
-                    setState(() {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => OnePlayer(),
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => OnePlayer(
+                          namePlayer1: _nameController.text,
                         ),
-                      );
-                      maxCharacter = 'Digite seu nome...';
-                    });
+                      ),
+                    );
                   },
                   child: Text('Enviar', textAlign: TextAlign.center),
                 ),
@@ -75,7 +69,7 @@ class _CollectNameState extends State<CollectName> {
                     image: DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage(
-                        'assets/ringue.png',
+                        'assets/ring.png',
                       ),
                     ),
                     borderRadius: BorderRadius.circular(20),
@@ -94,8 +88,4 @@ class _CollectNameState extends State<CollectName> {
       ),
     );
   }
-}
-
-class Nome {
-  String namePlayer = ('${_nameController.text}');
 }
