@@ -57,14 +57,12 @@ class _ScoreboardState extends State<Scoreboard> {
   }
 
   String get image {
-    String _image;
     if (widget.player == Player.PLAYER_1) {
-      _image = 'user1';
+      return 'user1';
     } else if (widget.player == Player.PLAYER_2) {
-      _image = 'user2';
+      return 'user2';
     } else {
-      _image = 'tied';
+      return 'tied';
     }
-    return _image;
   }
 }

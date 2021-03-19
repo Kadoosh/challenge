@@ -21,44 +21,37 @@ class _StandardButtomState extends State<StandardButtom> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: SizedBox(
-        child: Container(
-          child: Row(
-            children: [
-              ElevatedButton(
-                onPressed: (widget.gameState != 'waiting')
-                    ? null
-                    : () {
-                        widget.onPressButton(widget.move);
-                      },
-                child: Container(
-                  height: 90,
-                  width: 90,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/$imageName.png'),
-                      fit: BoxFit.contain,
-                    ),
-                  ),
+      child: Row(
+        children: [
+          ElevatedButton(
+            onPressed: (widget.gameState != 'waiting')
+                ? null
+                : () {
+                    widget.onPressButton(widget.move);
+                  },
+            child: Container(
+              height: 90,
+              width: 90,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/$imageName.png'),
+                  fit: BoxFit.contain,
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
 
   String get imageName {
-    String _imageName;
-
     if (widget.move == Move.ROCK) {
-      _imageName = 'rock';
+      return 'rock';
     } else if (widget.move == Move.PAPER) {
-      _imageName = 'paper';
+      return 'paper';
     } else {
-      _imageName = 'scissors';
+      return 'scissors';
     }
-    return _imageName;
   }
 }
