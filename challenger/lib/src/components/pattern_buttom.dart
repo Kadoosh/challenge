@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 class StandardButtom extends StatefulWidget {
   final Move move;
   final Function(Move) onPressButton;
-  final String invisibleButtom;
+  final String gameState;
 
   StandardButtom({
     Key key,
     @required this.onPressButton,
     @required this.move,
-    @required this.invisibleButtom,
+    @required this.gameState,
   }) : super(key: key);
 
   @override
@@ -25,17 +25,19 @@ class _StandardButtomState extends State<StandardButtom> {
         child: Container(
           child: Row(
             children: [
-              SizedBox(
-                height: 90,
-                width: 90,
-                child: ElevatedButton(
-                  onPressed: buttonState(imageName),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/$imageName.png'),
-                        fit: BoxFit.scaleDown,
-                      ),
+              ElevatedButton(
+                onPressed: (widget.gameState != 'waiting')
+                    ? null
+                    : () {
+                        widget.onPressButton(widget.move);
+                      },
+                child: Container(
+                  height: 90,
+                  width: 90,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/$imageName.png'),
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),
@@ -58,15 +60,5 @@ class _StandardButtomState extends State<StandardButtom> {
       _imageName = 'scissors';
     }
     return _imageName;
-  }
-
-  dynamic buttonState(String imageName) {
-    if (widget.invisibleButtom != 'waiting') {
-      return null;
-    } else {
-      return () {
-        widget.onPressButton(widget.move);
-      };
-    }
   }
 }

@@ -9,11 +9,11 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 class OnePlayer extends StatefulWidget {
-  final String namePlayer1;
+  final String player1Name;
 
   OnePlayer({
     Key key,
-    @required this.namePlayer1,
+    @required this.player1Name,
   }) : super(key: key);
   @override
   _OnePlayerState createState() => _OnePlayerState();
@@ -95,17 +95,17 @@ class _OnePlayerState extends State<OnePlayer> {
                                     Scoreboard(
                                       player: Player.PLAYER_1,
                                       counter: player1Wins,
-                                      namePlayer: '${widget.namePlayer1}: ',
+                                      playerName: '${widget.player1Name}: ',
                                     ),
                                     Scoreboard(
                                       player: null,
                                       counter: ties,
-                                      namePlayer: 'Empates: ',
+                                      playerName: 'Empates: ',
                                     ),
                                     Scoreboard(
                                       player: Player.PLAYER_2,
                                       counter: player2Wins,
-                                      namePlayer: 'Robo: ',
+                                      playerName: 'Robo: ',
                                     ),
                                   ],
                                 ),
@@ -207,7 +207,7 @@ class _OnePlayerState extends State<OnePlayer> {
                                       border: Border.all(color: Colors.black),
                                     ),
                                     child: Text(
-                                      'Jogada ${widget.namePlayer1}',
+                                      'Jogada ${widget.player1Name}',
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         fontSize: 15,
@@ -232,17 +232,17 @@ class _OnePlayerState extends State<OnePlayer> {
                     StandardButtom(
                       onPressButton: movePlays,
                       move: Move.ROCK,
-                      invisibleButtom: imageGameStage,
+                      gameState: imageGameStage,
                     ),
                     StandardButtom(
                       onPressButton: movePlays,
                       move: Move.PAPER,
-                      invisibleButtom: imageGameStage,
+                      gameState: imageGameStage,
                     ),
                     StandardButtom(
                       onPressButton: movePlays,
                       move: Move.SCISSORS,
-                      invisibleButtom: imageGameStage,
+                      gameState: imageGameStage,
                     ),
                   ],
                 ),
@@ -309,7 +309,7 @@ class _OnePlayerState extends State<OnePlayer> {
           MaterialPageRoute(
             builder: (context) => PlayAgain(
               winnerPlayer: winner,
-              nameWinnerPlayer: widget.namePlayer1,
+              nameWinnerPlayer: widget.player1Name,
             ),
           ),
         );

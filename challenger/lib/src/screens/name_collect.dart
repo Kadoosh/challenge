@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'one_player.dart';
 
 class CollectName extends StatelessWidget {
-  const CollectName({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     TextEditingController _nameController = TextEditingController();
@@ -49,9 +47,7 @@ class CollectName extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => OnePlayer(
-                          namePlayer1: _nameController.text,
-                        ),
+                        builder: (context) => OnePlayer(player1Name: _nameController.text),
                       ),
                     );
                   },
@@ -61,24 +57,23 @@ class CollectName extends StatelessWidget {
               SizedBox(
                 height: 60,
               ),
-              SizedBox(
+              Container(
                 height: 320,
                 width: 320,
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage(
-                        'assets/ring.png',
-                      ),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage(
+                      'assets/ring.png',
                     ),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.black),
                   ),
-                  child: Center(
-                    child: Image.asset(
-                      'assets/ppt.png',
-                    ),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.black),
+                ),
+                child: Container(
+                  alignment: Alignment(0, 0),
+                  child: Image.asset(
+                    'assets/ppt.png',
                   ),
                 ),
               ),

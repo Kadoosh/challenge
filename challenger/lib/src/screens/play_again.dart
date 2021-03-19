@@ -87,7 +87,7 @@ class PlayAgain extends StatelessWidget {
                             ),
                           );
                         },
-                        child: Image.asset('assets/voltar.png'),
+                        child: Image.asset('assets/return.png'),
                       ),
                     ),
                   ],
@@ -103,7 +103,7 @@ class PlayAgain extends StatelessWidget {
                           Navigator.of(context).pop(
                             MaterialPageRoute(
                               builder: (context) => OnePlayer(
-                                namePlayer1: nameWinnerPlayer,
+                                player1Name: nameWinnerPlayer,
                               ),
                             ),
                           );

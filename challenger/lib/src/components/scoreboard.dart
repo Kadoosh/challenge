@@ -2,14 +2,14 @@ import 'package:challenger/src/models/player_move.dart';
 import 'package:flutter/material.dart';
 
 class Scoreboard extends StatefulWidget {
-  final String namePlayer;
+  final String playerName;
   final int counter;
   final Player player;
 
   Scoreboard({
     Key key,
     @required this.counter,
-    @required this.namePlayer,
+    @required this.playerName,
     @required this.player,
   }) : super(key: key);
 
@@ -35,7 +35,7 @@ class _ScoreboardState extends State<Scoreboard> {
         Flexible(
           child: Container(
             child: Text(
-              widget.namePlayer.toString(),
+              widget.playerName.toString(),
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: 18,
