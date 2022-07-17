@@ -7,6 +7,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< Updated upstream
     version: "2.5.0"
   audioplayers:
     dependency: "direct main"
@@ -15,6 +16,9 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.17.4"
+=======
+    version: "2.8.2"
+>>>>>>> Stashed changes
   boolean_selector:
     dependency: transitive
     description:
@@ -28,14 +32,14 @@ packages:
       name: characters
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "1.2.0"
   charcode:
     dependency: transitive
     description:
       name: charcode
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.0"
+    version: "1.3.1"
   clock:
     dependency: transitive
     description:
@@ -49,6 +53,7 @@ packages:
       name: collection
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< Updated upstream
     version: "1.15.0"
   convert:
     dependency: transitive
@@ -64,6 +69,9 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.5"
+=======
+    version: "1.16.0"
+>>>>>>> Stashed changes
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -77,6 +85,7 @@ packages:
       name: fake_async
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< Updated upstream
     version: "1.2.0"
   ffi:
     dependency: transitive
@@ -92,6 +101,9 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.0"
+=======
+    version: "1.3.0"
+>>>>>>> Stashed changes
   flutter:
     dependency: "direct main"
     description: flutter
@@ -120,13 +132,21 @@ packages:
       name: matcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.10"
+    version: "0.12.11"
+  material_color_utilities:
+    dependency: transitive
+    description:
+      name: material_color_utilities
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.4"
   meta:
     dependency: transitive
     description:
       name: meta
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< Updated upstream
     version: "1.3.0"
   nested:
     dependency: transitive
@@ -135,12 +155,16 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+=======
+    version: "1.7.0"
+>>>>>>> Stashed changes
   path:
     dependency: transitive
     description:
       name: path
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< Updated upstream
     version: "1.8.0"
   path_provider:
     dependency: transitive
@@ -205,6 +229,9 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.0.0"
+=======
+    version: "1.8.1"
+>>>>>>> Stashed changes
   sky_engine:
     dependency: transitive
     description: flutter
@@ -216,6 +243,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< Updated upstream
     version: "1.8.0"
   splashscreen:
     dependency: "direct main"
@@ -224,6 +252,9 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.5"
+=======
+    version: "1.8.2"
+>>>>>>> Stashed changes
   stack_trace:
     dependency: transitive
     description:
@@ -258,6 +289,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< Updated upstream
     version: "0.2.19"
   typed_data:
     dependency: transitive
@@ -273,12 +305,16 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.2"
+=======
+    version: "0.4.9"
+>>>>>>> Stashed changes
   vector_math:
     dependency: transitive
     description:
       name: vector_math
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< Updated upstream
     version: "2.1.0"
   win32:
     dependency: transitive
@@ -297,3 +333,8 @@ packages:
 sdks:
   dart: ">=2.12.0-259.9.beta <3.0.0"
   flutter: ">=1.20.0"
+=======
+    version: "2.1.2"
+sdks:
+  dart: ">=2.17.0-0 <3.0.0"
+>>>>>>> Stashed changes
